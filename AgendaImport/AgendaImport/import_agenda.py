@@ -6,14 +6,16 @@ import os
 #TODO: Add error handling codes associated with message, maybe change this to a separate file?
 error = {}
 #Find error code associated with print message 
-def findErr(errCode):
+
+
+def return_val(errCode):
     return error[errCode]
 
 #TODO Clean functions
 def clean_dataframe(df):
     return
 #need some way to fetch data
-def getColData(df, row, columnName):
+def get_col_data(df, row, columnName):
     col_idx = next((column for column in df.columns if str(column) == columnName), None)
 
     if col_idx:
@@ -23,16 +25,35 @@ def getColData(df, row, columnName):
 
 
 #TODO Read, 
+
+#Data Format for Reference
+# "*Date" -> date
+# "*Time Start" -> time_start
+# "*Time End" -> time_end
+# "*Session or Sub-session(Sub)" -> not held yet
+# "*Session Title" -> title
+# "*Room/Location" -> location
+# "Description" -> description
+# "Speakers" -> speaker
 def create_table(file):
     database = db()
     database.create_table
 
     dataframe = pd.read_excel(file, header = 14) #start from row 14
-    
-    for idx, row in dataframe.iterrows():
-        colData = {
-        }
-    return
+    rowNum = 0
+    for  row in dataframe.iterrows():
+        rowData = {
+            "date": get_col_data(dataframe, row "*Date"),
+            "time_start": get_col_data(dataframe, row "*Time Start"),
+            "time_end": get_col_data(dataframe, row "**Time End"),
+            "title": get_col_data(dataframe, row "*Session Title"),
+            "location": get_col_data(dataframe, row "*Room/Location"),
+            "description": get_col_data(dataframe, row "Description"),
+            "speaker": get_col_data(dataframe, row "*Speakers"),
+            }
+        database.insert(rowData)
+        rowNum +=1
+    return 0
 
 #run script - more or less finished
 if(len(sys.arv)==2):
@@ -41,4 +62,4 @@ else:
     print("Incorrect # of inputs")
 
 errno = create_table(file)
-print(findErr(errno))
+print(return_val(errno))
