@@ -40,6 +40,7 @@ def create_table(file):
     rowNum = 0
     for index, row in dataframe.iterrows():
         rowData = {
+            "id": index,
             "date": get_col_data(dataframe, row, "*Date"),
             "time_start": get_col_data(dataframe, row, "*Time Start"),
             "time_end": get_col_data(dataframe, row, "**Time End"),
